@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caeid - Music Producer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6850/6850879.png" type="image/png">
   <style>
     /* General Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,11 +13,18 @@
     a { color: inherit; }
 
     /* Header Styles */
-    header { background: #000; padding: 1rem; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-    header h1 { font-size: 2rem; color: #ff007a; text-align: center; }
-    nav { text-align: center; margin-top: 0.5rem; }
-    nav a { color: #fff; text-decoration: none; margin: 0 1rem; font-size: 1.2rem; }
-    nav a:hover { color: #ff007a; }
+    header { background: #000; padding: 1rem; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.5); display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 2rem; color: #ff007a; text-align: center; margin: 0; }
+
+    /* Fullscreen Nav Menu Styles */
+    .nav-toggle { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+    .fullscreen-nav { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); color: white; display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .fullscreen-nav.open { opacity: 1; visibility: visible; }
+    .fullscreen-nav ul { list-style: none; padding: 0; text-align: center; }
+    .fullscreen-nav li { margin: 2rem 0; }
+    .fullscreen-nav a { color: white; text-decoration: none; font-size: 2rem; }
+    .fullscreen-nav a:hover { color: #ff007a; }
+    .nav-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; color: white; font-size: 3rem; cursor: pointer; }
 
     /* Hero Section Styles */
     .hero { background: url('https://geo-media.beatport.com/image_size/250x250/7e43784f-2329-4b89-b546-3a4892ca0e83.jpg') no-repeat center/cover; height: 80vh; position: relative; }
@@ -61,25 +69,47 @@
         opacity: 1;
     }
 
-    /* Videos and Spotify Sections Styles */
-    .video-slider, .spotify-slider {
-      overflow-x: auto;
+    /* Videos Section Styles */
+    #videos .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    #videos .video-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    #videos .video-item iframe {
       width: 100%;
+      height: 200px;
+      border: none;
+      transition: transform 0.3s ease;
     }
 
-    .video-slider-content, .spotify-slider-content {
-      display: flex;
+    #videos .video-item:hover iframe {
+      transform: scale(1.1);
     }
 
-    .video-item, .spotify-item {
-      margin-right: 20px;
-      width: 320px; /* Adjust as needed */
-      height: 200px; /* Adjust as needed */
+    /* Spotify Section Styles */
+    #spotify .spotify-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
     }
 
-    .video-item iframe, .spotify-item iframe {
+    #spotify .spotify-item {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    #spotify .spotify-item iframe {
       width: 100%;
-      height: 100%;
+      height: 380px;
       border: none;
     }
 
@@ -110,14 +140,19 @@
 
   <header>
     <h1>Caeid</h1>
-    <nav>
-      <a href="#hero">Home</a>
-      <a href="#about">About</a>
-      <a href="#music">Music</a>
-      <a href="#videos">Videos</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <button class="nav-toggle"><i class="fas fa-bars"></i></button>
   </header>
+
+  <div class="fullscreen-nav">
+    <button class="nav-close">&times;</button>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 
   <section id="hero" class="hero">
     <div class="hero-content">
@@ -198,73 +233,69 @@
 
   <section id="videos">
     <h2>Videos</h2>
-    <div class="video-slider">
-      <div class="video-slider-content">
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=R2ob2zNeTC4" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=hWT6vQiOTzg" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=fizWcNMRiTk" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=k024-HZe-dY" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=f-UrpZ_nsvo" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=eb0HfgksRFU" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=JH1tBigYVtM" allowfullscreen></iframe>
-        </div>
-        <div class="video-item">
-          <iframe src="https://www.youtube.com/watch?v=3zPzJjUxSXY" allowfullscreen></iframe>
-        </div>
+    <div class="video-grid">
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=R2ob2zNeTC4" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=hWT6vQiOTzg" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=fizWcNMRiTk" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=k024-HZe-dY" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=f-UrpZ_nsvo" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=eb0HfgksRFU" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=JH1tBigYVtM" allowfullscreen></iframe>
+      </div>
+      <div class="video-item">
+        <iframe src="https://www.youtube.com/watch?v=3zPzJjUxSXY" allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
   <section id="spotify">
     <h2>Listen on Spotify</h2>
-    <div class="spotify-slider">
-      <div class="spotify-slider-content">
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/4jS0zmMcuQqmTzZu7uQTfQ?si=nk58d2VfS_Ob2HadeqXfjA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/5s74pKoB7ZYcaajVATPxyK?si=KJFFFdB1SHGYt57k4rccJw" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/2MTEDx7YC3YDKxFCKkybMa?si=ggYS3wtJQL-Aqa-lc3R54A" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/4cFJlflipKXyAq8dDV1SVj?si=GkeZTfknS52FRnLY0o7E1g" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/2HYB3wQ1ORungBLqySVRWw?si=VIAsdfllSlGm_WwkwZnBsg" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/62hIqSwAi6faD3xedTcH28?si=n8fF9P0bQF2uS559aT6ACA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/436BQUe5jeVCNuXKdoInIg?si=6TiDX1OqS4CFjaOezcGZ3w" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/7DviEQzUG0hkA8uu88Sg8f?si=OtNWk-yKRvWgjZi14ZLwhw" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/7seI96StJPXeyP62fMCw6S?si=WvnuCDf-Rg6C_0_Q6yvgpA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/album/0yoBvIsbtZwDC4MajDWQxZ?si=bveH-ryCR8im1yEblEGpDg" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
-        <div class="spotify-item">
-          <iframe src="https://open.spotify.com/track/4AP7XXHv5N5sfMuuH7Q3U6?si=bd510b278c1d49d1" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-        </div>
+    <div class="spotify-grid">
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/4jS0zmMcuQqmTzZu7uQTfQ?si=nk58d2VfS_Ob2HadeqXfjA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/5s74pKoB7ZYcaajVATPxyK?si=KJFFFdB1SHGYt57k4rccJw" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/2MTEDx7YC3YDKxFCKkybMa?si=ggYS3wtJQL-Aqa-lc3R54A" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/4cFJlflipKXyAq8dDV1SVj?si=GkeZTfknS52FRnLY0o7E1g" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/2HYB3wQ1ORungBLqySVRWw?si=VIAsdfllSlGm_WwkwZnBsg" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/62hIqSwAi6faD3xedTcH28?si=n8fF9P0bQF2uS559aT6ACA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/436BQUe5jeVCNuXKdoInIg?si=6TiDX1OqS4CFjaOezcGZ3w" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/7DviEQzUG0hkA8uu88Sg8f?si=OtNWk-yKRvWgjZi14ZLwhw" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/7seI96StJPXeyP62fMCw6S?si=WvnuCDf-Rg6C_0_Q6yvgpA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/album/0yoBvIsbtZwDC4MajDWQxZ?si=bveH-ryCR8im1yEblEGpDg" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      </div>
+      <div class="spotify-item">
+        <iframe src="https://open.spotify.com/track/4AP7XXHv5N5sfMuuH7Q3U6?si=bd510b278c1d49d1" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </div>
     </div>
   </section>
@@ -286,6 +317,25 @@
   <script>
     // Dynamic year
     document.getElementById("year").innerHTML = new Date().getFullYear();
+
+    // Fullscreen Nav
+    const navToggle = document.querySelector('.nav-toggle');
+    const fullscreenNav = document.querySelector('.fullscreen-nav');
+    const navClose = document.querySelector('.nav-close');
+
+    navToggle.addEventListener('click', () => {
+      fullscreenNav.classList.add('open');
+    });
+
+    navClose.addEventListener('click', () => {
+      fullscreenNav.classList.remove('open');
+    });
+
+    document.querySelectorAll('.fullscreen-nav a').forEach(item => {
+      item.addEventListener('click', () => {
+        fullscreenNav.classList.remove('open');
+      });
+    });
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
