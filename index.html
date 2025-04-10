@@ -4,14 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caeid - Music Producer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
+    /* General Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; background: #121212; color: #fff; }
+    a { color: inherit; }
+
+    /* Header Styles */
     header { background: #000; padding: 1rem; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
     header h1 { font-size: 2rem; color: #ff007a; text-align: center; }
     nav { text-align: center; margin-top: 0.5rem; }
     nav a { color: #fff; text-decoration: none; margin: 0 1rem; font-size: 1.2rem; }
     nav a:hover { color: #ff007a; }
+
+    /* Hero Section Styles */
     .hero { background: url('https://geo-media.beatport.com/image_size/250x250/7e43784f-2329-4b89-b546-3a4892ca0e83.jpg') no-repeat center/cover; height: 80vh; position: relative; }
     .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3)); }
     .hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 1; }
@@ -19,22 +26,88 @@
     .hero-content p { font-size: 1.5rem; margin-bottom: 1rem; }
     .btn { background: #ff007a; color: #fff; padding: 0.8rem 2rem; border-radius: 5px; text-decoration: none; }
     .btn:hover { background: #cc0061; }
+
+    /* General Section Styles */
     section { padding: 4rem 2rem; }
     #about { background: #1a1a1a; }
     #music { background: #222; }
     #videos { background: #1a1a1a; }
     #spotify { background: #222; }
     #contact { background: #1a1a1a; text-align: center; }
-    .slider { overflow: hidden; width: 100%; }
+
+    /* Music Section Styles */
+    .slider { overflow-x: auto; width: 100%; }
     .slider-content { display: flex; }
-    .music-cover { margin-right: 20px; }
-    .music-cover img { width: 200px; height: 200px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-    .video-list, .spotify-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-    iframe { border: none; }
+    .music-cover { position: relative; margin-right: 20px; }
+    .music-cover img { width: 200px; height: 200px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: block; }
+    .music-cover .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 10px;
+    }
+    .music-cover:hover .overlay {
+        opacity: 1;
+    }
+
+    /* Videos and Spotify Sections Styles */
+    .video-slider, .spotify-slider {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    .video-slider-content, .spotify-slider-content {
+      display: flex;
+    }
+
+    .video-item, .spotify-item {
+      margin-right: 20px;
+      width: 320px; /* Adjust as needed */
+      height: 200px; /* Adjust as needed */
+    }
+
+    .video-item iframe, .spotify-item iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Contact Section Styles */
+    #contact p { margin-bottom: 1rem; }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .social-icons a {
+      font-size: 2rem;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #ff007a;
+    }
+
+    /* Footer Styles */
     footer { background: #000; padding: 1rem; text-align: center; }
+
   </style>
 </head>
 <body>
+
   <header>
     <h1>Caeid</h1>
     <nav>
@@ -63,65 +136,157 @@
     <h2>Music</h2>
     <div class="slider">
       <div class="slider-content">
-        <a href="https://open.spotify.com/album/4jS0zmMcuQqmTzZu7uQTfQ?si=G6TgYiAWRd6ktmgayJ-kKw" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/7e43784f-2329-4b89-b546-3a4892ca0e83.jpg" alt="Descension"></a>
-        <a href="https://open.spotify.com/album/5s74pKoB7ZYcaajVATPxyK?si=gfFyV0HFRnyIU3jltI004Q" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/392e8e0c-c49c-4dff-af94-f8a97dabded2.jpg" alt="Enigmatic Float"></a>
-        <a href="https://open.spotify.com/album/2MTEDx7YC3YDKxFCKkybMa?si=vnLuIl5uSQC8_CXMeVgswQ" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/cfb7aef0-ba82-40d1-9161-dc74ceae4610.jpg" alt="Fallen Star"></a>
-        <a href="https://open.spotify.com/album/2HYB3wQ1ORungBLqySVRWw?si=Oto0_2l3Q72_W-s22thAhw" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/13aa8bfc-3a40-488f-959f-2cc77e69e398.jpg" alt="Hymn"></a>
-        <a href="https://open.spotify.com/album/4cFJlflipKXyAq8dDV1SVj?si=_tLRhu83T0GfM5CY2T5Xqg" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/c0f6295f-c18b-4b47-b75b-81985996c63e.jpg" alt="Nirvana"></a>
-        <a href="https://open.spotify.com/album/62hIqSwAi6faD3xedTcH28?si=jAWOgGtqTxyBPQNM9_Gu2w" class="music-cover"><img src="https://images.music-worx.com/covers/Rapture-ShiftAxis-Records-98982-musicworx.jpg" alt="Rapture"></a>
-        <a href="https://open.spotify.com/album/436BQUe5jeVCNuXKdoInIg?si=qRl0yNJpSGKRB7znGU830g" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/eb44e1af-e032-4078-a51f-03c03eca823c.jpg" alt="Cotton Blouse"></a>
-        <a href="https://open.spotify.com/track/02RBNaNRdWyFR1aSiupliL?si=adac1d38a10046d4" class="music-cover"><img src="https://static.wixstatic.com/media/970089_a9cc99fd2c274424a76fad87cf194af7~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/a32245f0-757d-4d68-a876-875040abe8f1.jpg" alt="Undine"></a>
-        <a href="https://open.spotify.com/track/2y581RNR0fWCMQ7pEdmdkY?si=685633a7132147ad" class="music-cover"><img src="https://static.wixstatic.com/media/970089_a12b08d05b6d41d2b0c86b961e15bcd5~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/bcc1e99e-b597-41ba-be74-7076ea8fbd72.jpg" alt="Mysterious Tunnel"></a>
-        <a href="https://open.spotify.com/album/7DviEQzUG0hkA8uu88Sg8f?si=dLhVH_X_ToyXlEWXU0_nfQ" class="music-cover"><img src="https://geo-media.beatport.com/image_size/500x500/cfe3b748-6d36-4314-99b8-1d915c44a866.jpg" alt="Sky Dance"></a>
-        <a href="https://open.spotify.com/track/0MVUXLHiDArdMqwdcNq5q8?si=9fae9e406e934982" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/06718115-66b3-4175-8009-7a11080190d4.jpg" alt="Small House"></a>
-        <a href="https://open.spotify.com/track/74YAHJ71YslgaYbF9gaVqM?si=d3e3d922041c4ecc" class="music-cover"><img src="https://static.wixstatic.com/media/970089_6d4585457bdc418ca722e20173719945~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/e513cc08-dfdf-4e48-8c9a-2ff995052093.jpg" alt="Revival"></a>
-        <a href="https://open.spotify.com/track/7qJShTxzlpoqD7OeNNdLtK?si=dd1a587e55f14f3e" class="music-cover"><img src="https://static.wixstatic.com/media/970089_83a4cdff6597489c854fc7b40cf5243c~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/89e8d3fe-a4ce-4fa9-bce0-482de20a25f1.jpg" alt="Leap"></a>
-        <a href="https://open.spotify.com/album/7seI96StJPXeyP62fMCw6S?si=_dKb-fz7S8OnzARphgc4dg" class="music-cover"><img src="https://geo-media.beatport.com/image_size/1400x1400/cc0b5ed5-fc23-4c57-869f-abadf794a1e4.jpg" alt="Dark Light EP"></a>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/7e43784f-2329-4b89-b546-3a4892ca0e83.jpg" alt="Descension">
+          <a href="https://open.spotify.com/album/4jS0zmMcuQqmTzZu7uQTfQ?si=G6TgYiAWRd6ktmgayJ-kKw" class="overlay">Descension</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/392e8e0c-c49c-4dff-af94-f8a97dabded2.jpg" alt="Enigmatic Float">
+          <a href="https://open.spotify.com/album/5s74pKoB7ZYcaajVATPxyK?si=gfFyV0HFRnyIU3jltI004Q" class="overlay">Enigmatic Float</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/cfb7aef0-ba82-40d1-9161-dc74ceae4610.jpg" alt="Fallen Star">
+          <a href="https://open.spotify.com/album/2MTEDx7YC3YDKxFCKkybMa?si=vnLuIl5uSQC8_CXMeVgswQ" class="overlay">Fallen Star</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/13aa8bfc-3a40-488f-959f-2cc77e69e398.jpg" alt="Hymn">
+          <a href="https://open.spotify.com/album/2HYB3wQ1ORungBLqySVRWw?si=Oto0_2l3Q72_W-s22thAhw" class="overlay">Hymn</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/c0f6295f-c18b-4b47-b75b-81985996c63e.jpg" alt="Nirvana">
+          <a href="https://open.spotify.com/album/4cFJlflipKXyAq8dDV1SVj?si=_tLRhu83T0GfM5CY2T5Xqg" class="overlay">Nirvana</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://images.music-worx.com/covers/Rapture-ShiftAxis-Records-98982-musicworx.jpg" alt="Rapture">
+          <a href="https://open.spotify.com/album/62hIqSwAi6faD3xedTcH28?si=jAWOgGtqTxyBPQNM9_Gu2w" class="overlay">Rapture</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/eb44e1af-e032-4078-a51f-03c03eca823c.jpg" alt="Cotton Blouse">
+          <a href="https://open.spotify.com/album/436BQUe5jeVCNuXKdoInIg?si=qRl0yNJpSGKRB7znGU830g" class="overlay">Cotton Blouse</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://static.wixstatic.com/media/970089_a9cc99fd2c274424a76fad87cf194af7~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/a32245f0-757d-4d68-a876-875040abe8f1.jpg" alt="Undine">
+          <a href="https://open.spotify.com/track/02RBNaNRdWyFR1aSiupliL?si=adac1d38a10046d4" class="overlay">Undine</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://static.wixstatic.com/media/970089_a12b08d05b6d41d2b0c86b961e15bcd5~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/bcc1e99e-b597-41ba-be74-7076ea8fbd72.jpg" alt="Mysterious Tunnel">
+          <a href="https://open.spotify.com/track/2y581RNR0fWCMQ7pEdmdkY?si=685633a7132147ad" class="overlay">Mysterious Tunnel</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/500x500/cfe3b748-6d36-4314-99b8-1d915c44a866.jpg" alt="Sky Dance">
+          <a href="https://open.spotify.com/album/7DviEQzUG0hkA8uu88Sg8f?si=dLhVH_X_ToyXlEWXU0_nfQ" class="overlay">Sky Dance</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/06718115-66b3-4175-8009-7a11080190d4.jpg" alt="Small House">
+          <a href="https://open.spotify.com/track/0MVUXLHiDArdMqwdcNq5q8?si=9fae9e406e934982" class="overlay">Small House</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://static.wixstatic.com/media/970089_6d4585457bdc418ca722e20173719945~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/e513cc08-dfdf-4e48-8c9a-2ff995052093.jpg" alt="Revival">
+          <a href="https://open.spotify.com/track/74YAHJ71YslgaYbF9gaVqM?si=d3e3d922041c4ecc" class="overlay">Revival</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://static.wixstatic.com/media/970089_83a4cdff6597489c854fc7b40cf5243c~mv2.jpg/v1/fill/w_301,h_240,al_c,lg_1,q_80,enc_avif,quality_auto/89e8d3fe-a4ce-4fa9-bce0-482de20a25f1.jpg" alt="Leap">
+          <a href="https://open.spotify.com/track/7qJShTxzlpoqD7OeNNdLtK?si=dd1a587e55f14f3e" class="overlay">Leap</a>
+        </div>
+        <div class="music-cover">
+          <img src="https://geo-media.beatport.com/image_size/1400x1400/cc0b5ed5-fc23-4c57-869f-abadf794a1e4.jpg" alt="Dark Light EP">
+          <a href="https://open.spotify.com/album/7seI96StJPXeyP62fMCw6S?si=_dKb-fz7S8OnzARphgc4dg" class="overlay">Dark Light EP</a>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="videos">
     <h2>Videos</h2>
-    <div class="video-list">
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=R2ob2zNeTC4" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=hWT6vQiOTzg" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=fizWcNMRiTk" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=k024-HZe-dY" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=f-UrpZ_nsvo" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=eb0HfgksRFU" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=JH1tBigYVtM" frameborder="0" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/watch?v=3zPzJjUxSXY" frameborder="0" allowfullscreen></iframe>
+    <div class="video-slider">
+      <div class="video-slider-content">
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=R2ob2zNeTC4" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=hWT6vQiOTzg" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=fizWcNMRiTk" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=k024-HZe-dY" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=f-UrpZ_nsvo" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=eb0HfgksRFU" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=JH1tBigYVtM" allowfullscreen></iframe>
+        </div>
+        <div class="video-item">
+          <iframe src="https://www.youtube.com/watch?v=3zPzJjUxSXY" allowfullscreen></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="spotify">
     <h2>Listen on Spotify</h2>
-    <div class="spotify-list">
-      <iframe src="https://open.spotify.com/album/4jS0zmMcuQqmTzZu7uQTfQ?si=nk58d2VfS_Ob2HadeqXfjA" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/5s74pKoB7ZYcaajVATPxyK?si=KJFFFdB1SHGYt57k4rccJw" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/2MTEDx7YC3YDKxFCKkybMa?si=ggYS3wtJQL-Aqa-lc3R54A" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/4cFJlflipKXyAq8dDV1SVj?si=GkeZTfknS52FRnLY0o7E1g" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/2HYB3wQ1ORungBLqySVRWw?si=VIAsdfllSlGm_WwkwZnBsg" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/62hIqSwAi6faD3xedTcH28?si=n8fF9P0bQF2uS559aT6ACA" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/436BQUe5jeVCNuXKdoInIg?si=6TiDX1OqS4CFjaOezcGZ3w" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/7DviEQzUG0hkA8uu88Sg8f?si=OtNWk-yKRvWgjZi14ZLwhw" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/7seI96StJPXeyP62fMCw6S?si=WvnuCDf-Rg6C_0_Q6yvgpA" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/album/0yoBvIsbtZwDC4MajDWQxZ?si=bveH-ryCR8im1yEblEGpDg" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/track/4AP7XXHv5N5sfMuuH7Q3U6?si=bd510b278c1d49d1" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <div class="spotify-slider">
+      <div class="spotify-slider-content">
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/4jS0zmMcuQqmTzZu7uQTfQ?si=nk58d2VfS_Ob2HadeqXfjA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/5s74pKoB7ZYcaajVATPxyK?si=KJFFFdB1SHGYt57k4rccJw" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/2MTEDx7YC3YDKxFCKkybMa?si=ggYS3wtJQL-Aqa-lc3R54A" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/4cFJlflipKXyAq8dDV1SVj?si=GkeZTfknS52FRnLY0o7E1g" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/2HYB3wQ1ORungBLqySVRWw?si=VIAsdfllSlGm_WwkwZnBsg" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/62hIqSwAi6faD3xedTcH28?si=n8fF9P0bQF2uS559aT6ACA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/436BQUe5jeVCNuXKdoInIg?si=6TiDX1OqS4CFjaOezcGZ3w" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/7DviEQzUG0hkA8uu88Sg8f?si=OtNWk-yKRvWgjZi14ZLwhw" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/7seI96StJPXeyP62fMCw6S?si=WvnuCDf-Rg6C_0_Q6yvgpA" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/album/0yoBvIsbtZwDC4MajDWQxZ?si=bveH-ryCR8im1yEblEGpDg" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-item">
+          <iframe src="https://open.spotify.com/track/4AP7XXHv5N5sfMuuH7Q3U6?si=bd510b278c1d49d1" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: sniks6334 {at} gmail {dot} com</p>
-    <p>Instagram: <a href="https://instagram.com/djpulse">instagram.com/c.a.e.i.d</a></p>
-    <p>SoundCloud: <a href="https://soundcloud.com/djpulse">soundcloud.com/caeid</a></p>
+    <div class="social-icons">
+        <a href="https://instagram.com/djpulse" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://soundcloud.com/djpulse" target="_blank"><i class="fab fa-soundcloud"></i></a>
+        <a href="https://open.spotify.com/artist/0j2o1iJyJ2U9K9J5xO9jVj" target="_blank"><i class="fab fa-spotify"></i></a>
+        <a href="mailto:sniks6334@gmail.com"><i class="far fa-envelope"></i></a>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 Caeid. All rights reserved.</p>
+    <p>© <span id="year"></span> Caeid. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Dynamic year
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
@@ -149,21 +314,17 @@
     let startX;
     let currentTranslate = 0;
     let prevTranslate = 0;
-
     slider.addEventListener('mousedown', (e) => {
       isDragging = true;
       startX = e.pageX;
       prevTranslate = currentTranslate;
     });
-
     slider.addEventListener('mouseup', () => {
       isDragging = false;
     });
-
     slider.addEventListener('mouseleave', () => {
       isDragging = false;
     });
-
     slider.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       const x = e.pageX;
@@ -183,11 +344,9 @@
       startX = e.touches[0].pageX;
       prevTranslate = currentTranslate;
     });
-
     slider.addEventListener('touchend', () => {
       isDragging = false;
     });
-
     slider.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
       const x = e.touches[0].pageX;
@@ -200,17 +359,7 @@
       if (currentTranslate < maxTranslate) currentTranslate = maxTranslate;
       sliderContent.style.transform = `translateX(${currentTranslate}px)`;
     });
-
-    // Hover effects
-    const musicCovers = document.querySelectorAll('.music-cover');
-    musicCovers.forEach(cover => {
-      cover.addEventListener('mouseenter', () => {
-        gsap.to(cover, { scale: 1.1, duration: 0.3 });
-      });
-      cover.addEventListener('mouseleave', () => {
-        gsap.to(cover, { scale: 1, duration: 0.3 });
-      });
-    });
   </script>
+
 </body>
 </html>
